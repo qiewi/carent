@@ -6,6 +6,7 @@ import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOption
 
 import { manufacturers } from '@/constants';
 import { SearchManufacturerProps } from '@/types'
+import React from 'react';
 
 const SearchManufacturer = ({ manufacturer, setManufacturer}: SearchManufacturerProps) => {
   const [query, setQuery] = useState('');
@@ -56,7 +57,18 @@ const SearchManufacturer = ({ manufacturer, setManufacturer}: SearchManufacturer
                             : 'text-gray-900'}
                         `} 
                         value={item}                      >
-                          {item}
+                          {({ selected, active }) => (
+                            <>
+                              <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                                {item}
+                              </span>
+                              
+                              {selected ? (
+                                <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active? "text-white": "text-pribg-primary-purple"}`}
+                                ></span>
+                              ) : null}
+                            </>
+                          )}
                       </ComboboxOption>
                   ))}
                 </ComboboxOptions>
